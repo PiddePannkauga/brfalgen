@@ -18,8 +18,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return { props: { about: res.items } };
 };
 
-const About: NextPage = (props) => {
-  console.log(props.about[0].fields);
+const About: NextPage = (props: any) => {
   return (
     <div>
       <Header />

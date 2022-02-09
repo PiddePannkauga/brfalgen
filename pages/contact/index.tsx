@@ -18,8 +18,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return { props: { contact: res.items } };
 };
 
-const Contact: NextPage = (props) => {
-  console.log(props.contact[0]);
+const Contact: NextPage = (props: any) => {
   return (
     <div>
       <Header />

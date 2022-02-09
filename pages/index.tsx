@@ -20,9 +20,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return { props: { posts: res.items } };
 };
 
-const Home: NextPage = (props) => {
-  console.log(props.posts);
+type Post = {
+  fields: {
+    title: string;
+    id: string;
+  };
+};
 
+const Home: NextPage = (props: any) => {
   return (
     <div>
       <Head>
@@ -34,8 +39,8 @@ const Home: NextPage = (props) => {
 
       <main className={styles.main}>
         <div className={styles.grid}>
-          {props.posts.map((post) => (
-            <div className={styles.card}>
+          {props.posts.map((post: Post) => (
+            <div key={post.fields.id} className={styles.card}>
               <h2>{post.fields.title}</h2>
               <p>Här ska det bli enkelt att visa nya saker</p>
             </div>

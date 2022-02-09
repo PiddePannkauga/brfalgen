@@ -9,8 +9,7 @@ import Link from "next/link";
 
 const renderOption = {
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-      console.log(node);
+    [BLOCKS.EMBEDDED_ASSET]: (node: any, children: any) => {
       return (
         <a href={`https:${node.data.target.fields.file.url}`}>
           {node.data.target.fields.title}
@@ -33,8 +32,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return { props: { dokument: res.items } };
 };
 
-const Dokument: NextPage = (props) => {
-  console.log(props.dokument[0].fields, renderOption);
+const Dokument: NextPage = (props: any) => {
   return (
     <div>
       <Header />
