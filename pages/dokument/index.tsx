@@ -2,16 +2,17 @@ import type { NextPage } from "next";
 import styles from "../../styles/Home.module.css";
 import { GetStaticProps } from "next";
 import { createClient } from "contentful";
-import { Header } from "../../components/header";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
-import Link from "next/link";
 
 const renderOption = {
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: (node: any, children: any) => {
       return (
-        <a href={`https:${node.data.target.fields.file.url}`}>
+        <a
+          key={node.data.target.sys.id}
+          href={`https:${node.data.target.fields.file.url}`}
+        >
           {node.data.target.fields.title}
         </a>
       );
@@ -34,22 +35,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const Dokument: NextPage = (props: any) => {
   return (
-    <div>
-      <Header />
-      <main className={styles.main}>
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            {documentToReactComponents(
-              props.dokument[0].fields.dokument,
-              renderOption
-            )}
-          </div>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        Brf Älgen info@brfalgen.se Osbygatan 1 214 43 Malmö Orgnr: 746001-0205
-      </footer>
+    <div className={styles.grid}>
+      <div className={styles.card}>
+        <h2>Dokument</h2>
+        <ul>
+          {props.dokument.map((item: any) => (
+            <li key={item.id}>
+              {documentToReactComponents(item.fields.dokument, renderOption)}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

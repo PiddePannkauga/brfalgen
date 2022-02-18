@@ -20,19 +20,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 const Contact: NextPage = (props: any) => {
   return (
-    <div>
-      <Header />
-      <main className={styles.main}>
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            {documentToReactComponents(props.contact[0].fields.contact)}
-          </div>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        Brf Älgen info@brfalgen.se Osbygatan 1 214 43 Malmö Orgnr: 746001-0205
-      </footer>
+    <div className={styles.grid}>
+      <div className={styles.card}>
+        {documentToReactComponents(props.contact[0].fields.contact)}
+      </div>
     </div>
   );
 };

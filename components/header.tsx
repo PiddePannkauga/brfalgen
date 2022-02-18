@@ -5,21 +5,19 @@ import Link from "next/link";
 export const Header: NextComponentType = (props) => {
   return (
     <div className={header.header}>
-      <h1>Välkommen till BRF Älgen</h1>
-      <ul>
-        <li>
-          <Link href={"/about"}>Om Föreningen</Link>
-        </li>
-        <li>
-          <Link href={"/boendeinfo"}>Boende info</Link>
-        </li>
-        <li>
-          <Link href={"/contact"}>Kontakt</Link>
-        </li>
-        <li>
-          <Link href={"/dokument"}>Dokument</Link>
-        </li>
-      </ul>
+      <Link href={"/"}>
+        <h1>Välkommen till BRF Älgen</h1>
+      </Link>
+      <div className={header.navbar}>
+        <Link href={"/"}>Hem</Link>
+        <Link href={"/about"}>Om Föreningen</Link>
+
+        <Link href={"/boendeinfo"}>Boende info</Link>
+
+        <Link href={"/contact"}>Kontakt</Link>
+
+        <Link href={"/dokument"}>Dokument</Link>
+      </div>
     </div>
   );
 };
