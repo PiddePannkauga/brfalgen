@@ -12,7 +12,7 @@ export const Header: NextComponentType = (props) => {
         <Link href={"/"}>Hem</Link>
         <Link href={"/about"}>Om Föreningen</Link>
 
-        <Link href={"/boendeinfo"}>Boende info</Link>
+        <Link href={"/boendeinfo"}>Boendeinfo</Link>
 
         <Link href={"/contact"}>Kontakt</Link>
 
