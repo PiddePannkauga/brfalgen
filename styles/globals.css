@@ -19,8 +19,13 @@ a {
   --primary: #338848;
   --primary-hover: #2cc756;
   --primary-accent: #09160a;
-  --secondary: #fbedb3;
-  --main-background: #f3eac6;
+  --secondary: #ffeeac;
+  --main-background: #f0e3b0;
   --border-primary: 5px;
   --text-hover: #213121;
+}
+
+@font-face {
+  font-family: "header-font";
+  src: url("./fonts/Montserrat-VariableFont_wght.ttf");
 }
