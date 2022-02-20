@@ -12,7 +12,7 @@
   border-bottom: var(--border-primary) solid var(--primary-accent);
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  transition: top 500ms ease-in-out;
+  transition: top 1s ease-in-out;
 }
 
 .scrollup {
