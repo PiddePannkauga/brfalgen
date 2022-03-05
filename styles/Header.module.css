@@ -7,15 +7,18 @@
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 1rem 1rem 0 1rem;
-  min-height: 100px;
   background-color: var(--primary);
   border-bottom: var(--border-primary) solid var(--primary-accent);
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  transition: top 1s ease-in-out;
+  transition: top 0.5s ease-in-out;
 }
 
 .scrollup {
+  top: 0;
+}
+
+.header:focus-within {
   top: 0;
 }
 

@@ -5,12 +5,11 @@ import { Header } from "../components/header";
 
 const Layout: NextPage = ({ children }: any) => {
   return (
-    <div>
+    <div lang="sv">
       <Head>
         <title>BRF Älgen</title>
         <meta name="description" content="BRF Älgen hemsida" />
         <link rel="icon" href="/favicon.ico" />
-        <html lang="sv"></html>
       </Head>
       <Header />
 

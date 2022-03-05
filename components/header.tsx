@@ -9,8 +9,13 @@ let previousScrollPosition = 0;
 const isScrollingDown = () => {
   let currentScrolledPosition = window.scrollY || window.pageYOffset;
   let scrollingDown;
+  const headerHeight = document.querySelector("nav")?.clientHeight;
 
-  if (currentScrolledPosition > previousScrollPosition) {
+  if (
+    headerHeight &&
+    currentScrolledPosition > previousScrollPosition &&
+    currentScrolledPosition > headerHeight
+  ) {
     scrollingDown = true;
   } else {
     scrollingDown = false;
