@@ -2,72 +2,96 @@ import type { NextComponentType } from "next";
 import header from "../styles/Header.module.css";
 import Link from "next/link";
 import cn from "classnames";
-import { useState } from "react";
-
-let previousScrollPosition = 0;
-
-const isScrollingDown = () => {
-  let currentScrolledPosition = window.scrollY || window.pageYOffset;
-  let scrollingDown;
-  const headerHeight = document.querySelector("nav")?.clientHeight;
-
-  if (
-    headerHeight &&
-    currentScrolledPosition > previousScrollPosition &&
-    currentScrolledPosition > headerHeight
-  ) {
-    scrollingDown = true;
-  } else {
-    scrollingDown = false;
-  }
-  previousScrollPosition = currentScrolledPosition;
-
-  return scrollingDown;
-};
-
-let throttleWait = false;
-
-const throttle = (callback: any, time: number) => {
-  if (throttleWait) return;
-  throttleWait = true;
-  setTimeout(() => {
-    callback();
-    throttleWait = false;
-  }, time);
-};
+import { useEffect, useState } from "react";
 
 export const Header: NextComponentType = (props) => {
-  const [scrollingDown, setscrollingDown] = useState(false);
+  const [isNavOpen, setisNavOpen] = useState(true);
+  const [showMenuButton, setShowMenuButton] = useState(false);
 
-  if (typeof window !== "undefined") {
-    const handleNavScroll = () => {
-      setscrollingDown(isScrollingDown());
-    };
+  const handleNavbarOpen = () => {
+    setisNavOpen(!isNavOpen);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        if (entries[0].intersectionRatio < 0.2) {
+          setShowMenuButton(true);
+          setisNavOpen(false);
+          document.querySelector("nav")?.classList.add(`${header.sticky}`);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    const navbar = document.querySelector(`.${header.navbar}`);
+    if (navbar) {
+      observer.observe(navbar);
+    }
+
     window.addEventListener("scroll", () => {
-      throttle(handleNavScroll, 250);
+      if (window.scrollY < 10) {
+        setShowMenuButton(false);
+        setisNavOpen(true);
+        document.querySelector("nav")?.classList.remove(`${header.sticky}`);
+      }
     });
-  }
+    return () => {
+      if (navbar) {
+        observer.unobserve(navbar);
+      }
+    };
+  }, []);
 
-  const scrollUpStyle = cn({
-    [header.scrolldown]: scrollingDown,
-    [header.scrollup]: !scrollingDown,
-  });
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        if (entries[0].intersectionRatio < 0.2) {
+          setShowMenuButton(true);
+          setisNavOpen(false);
+          document.querySelector("nav")?.classList.add(`${header.sticky}`);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    const navbar = document.querySelector(`.${header.navbar}`);
+    if (navbar) {
+      observer.observe(navbar);
+    }
+  }, [isNavOpen]);
 
   return (
-    <nav className={cn(header.header, scrollUpStyle)}>
-      <Link href={"/"}>
-        <h1>Välkommen till BRF Älgen</h1>
-      </Link>
-      <div className={header.navbar}>
-        <Link href={"/"}>Hem</Link>
-        <Link href={"/about"}>Om Föreningen</Link>
+    <nav className={cn(header.header)}>
+      {!showMenuButton && (
+        <Link href={"/"}>
+          <h1>Välkommen till BRF Älgen</h1>
+        </Link>
+      )}
+      {showMenuButton ? (
+        isNavOpen ? (
+          <button
+            className={header.closebutton}
+            onClick={handleNavbarOpen}
+          ></button>
+        ) : (
+          <button
+            className={header.menubutton}
+            onClick={handleNavbarOpen}
+          ></button>
+        )
+      ) : null}
 
-        <Link href={"/boendeinfo"}>Boendeinfo</Link>
+      {isNavOpen && (
+        <div className={header.navbar}>
+          <Link href={"/"}>Hem</Link>
+          <Link href={"/about"}>Om Föreningen</Link>
 
-        <Link href={"/contact"}>Kontakt</Link>
+          <Link href={"/boendeinfo"}>Boendeinfo</Link>
 
-        <Link href={"/dokument"}>Dokument</Link>
-      </div>
+          <Link href={"/contact"}>Kontakt</Link>
+
+          <Link href={"/dokument"}>Dokument</Link>
+        </div>
+      )}
     </nav>
   );
 };
