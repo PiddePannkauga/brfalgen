@@ -19,6 +19,7 @@ export const Header: NextComponentType = (props) => {
           setShowMenuButton(true);
           setisNavOpen(false);
           document.querySelector("nav")?.classList.add(`${header.sticky}`);
+          const main = document.querySelector("main");
         }
       },
       { threshold: 0.2 }
@@ -29,7 +30,7 @@ export const Header: NextComponentType = (props) => {
     }
 
     window.addEventListener("scroll", () => {
-      if (window.scrollY < 10) {
+      if (window.scrollY < 150) {
         setShowMenuButton(false);
         setisNavOpen(true);
         document.querySelector("nav")?.classList.remove(`${header.sticky}`);
@@ -80,18 +81,19 @@ export const Header: NextComponentType = (props) => {
         )
       ) : null}
 
-      {isNavOpen && (
-        <div className={header.navbar}>
-          <Link href={"/"}>Hem</Link>
-          <Link href={"/about"}>Om Föreningen</Link>
+      <div
+        className={header.navbar}
+        style={isNavOpen ? { display: "flex" } : { display: "none" }}
+      >
+        <Link href={"/"}>Hem</Link>
+        <Link href={"/about"}>Om Föreningen</Link>
 
-          <Link href={"/boendeinfo"}>Boendeinfo</Link>
+        <Link href={"/boendeinfo"}>Boendeinfo</Link>
 
-          <Link href={"/contact"}>Kontakt</Link>
+        <Link href={"/contact"}>Kontakt</Link>
 
-          <Link href={"/dokument"}>Dokument</Link>
-        </div>
-      )}
+        <Link href={"/dokument"}>Dokument</Link>
+      </div>
     </nav>
   );
 };

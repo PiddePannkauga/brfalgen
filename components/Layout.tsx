@@ -13,7 +13,9 @@ const Layout: NextPage = ({ children }: any) => {
       </Head>
       <Header />
 
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <section style={{ marginTop: "18rem" }}>{children}</section>
+      </main>
 
       <footer className={styles.footer}>
         Brf Älgen info@brfalgen.se Osbygatan 1 214 43 Malmö Orgnr: 746001-0205
