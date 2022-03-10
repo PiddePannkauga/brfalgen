@@ -15,14 +15,13 @@ export const Header: NextComponentType = (props) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       function (entries) {
-        if (entries[0].intersectionRatio < 0.2) {
+        if (entries[0].intersectionRatio < 1) {
+          document.querySelector("nav")?.classList.add(`${header.sticky}`);
           setShowMenuButton(true);
           setisNavOpen(false);
-          document.querySelector("nav")?.classList.add(`${header.sticky}`);
-          const main = document.querySelector("main");
         }
       },
-      { threshold: 0.2 }
+      { threshold: 1 }
     );
     const navbar = document.querySelector(`.${header.navbar}`);
     if (navbar) {
@@ -30,7 +29,7 @@ export const Header: NextComponentType = (props) => {
     }
 
     window.addEventListener("scroll", () => {
-      if (window.scrollY < 150) {
+      if (window.scrollY < 170) {
         setShowMenuButton(false);
         setisNavOpen(true);
         document.querySelector("nav")?.classList.remove(`${header.sticky}`);

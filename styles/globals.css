@@ -29,3 +29,10 @@ a {
   font-family: "header-font";
   src: url("./fonts/Montserrat-VariableFont_wght.ttf");
 }
+
+@custom-media --small-viewport (max-width: 37.5rem);
+@custom-media --medium-viewport (max-width: 56.25rem);
+@custom-media --large-viewport (max-width: 62rem);
+@custom-media --huge-viewport (min-width: 70rem);
+@custom-media --enormous-viewport (min-width: 75rem);
+@custom-media --ludicrous-viewport (min-width: 88rem);
