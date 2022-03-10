@@ -4,6 +4,7 @@ import { GetStaticProps } from "next";
 import { createClient } from "contentful";
 import { Header } from "../../components/header";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import cn from "classnames";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const client = createClient({
@@ -21,7 +22,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Info: NextPage = (props: any) => {
   return (
     <div className={styles.grid}>
-      <div className={styles.card}>
+      <div className={cn(styles.card, styles.moose)}>
         {documentToReactComponents(props.info[0].fields.info)}
       </div>
     </div>

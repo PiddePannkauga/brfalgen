@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import { createClient } from "contentful";
 
 import styles from "../styles/Home.module.css";
+import cn from "classnames";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const client = createClient({
@@ -28,7 +29,7 @@ const Home: NextPage = (props: any) => {
   return (
     <div className={styles.grid}>
       {props.posts.map((post: Post) => (
-        <div key={post.fields.id} className={styles.card}>
+        <div key={post.fields.id} className={cn(styles.card, styles.moose)}>
           <h2>{post.fields.title}</h2>
           <p>Här ska det bli enkelt att visa nya saker</p>
         </div>

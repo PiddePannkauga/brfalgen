@@ -107,3 +107,21 @@
     flex-direction: column;
   }
 }
+
+.moose {
+  position: relative;
+}
+
+.moose:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.075;
+  background-image: url("./svg/algen.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
