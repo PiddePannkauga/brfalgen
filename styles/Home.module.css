@@ -75,6 +75,7 @@
   margin: 1rem;
   padding: 1.5rem;
   min-height: 25rem;
+  min-width: 20rem;
   max-width: 40rem;
   text-align: left;
   color: inherit;
@@ -96,6 +97,7 @@
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+  font-weight: 450;
 }
 
 .cardContent {
@@ -137,7 +139,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.4;
+  opacity: 0.25;
   background-image: url("./svg/algen.svg");
   background-repeat: no-repeat;
   background-position: center center;
