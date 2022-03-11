@@ -2,9 +2,7 @@ import type { NextPage } from "next";
 import styles from "../../styles/Home.module.css";
 import { GetStaticProps } from "next";
 import { createClient } from "contentful";
-import { Header } from "../../components/header";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import cn from "classnames";
 import { Card } from "../../components/card";
 
 export const getStaticProps: GetStaticProps = async (context) => {

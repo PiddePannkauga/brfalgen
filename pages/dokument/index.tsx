@@ -4,7 +4,8 @@ import { GetStaticProps } from "next";
 import { createClient } from "contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
-import cn from "classnames";
+
+import { Card } from "../../components/card";
 
 const renderOption = {
   renderNode: {
@@ -37,7 +38,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Dokument: NextPage = (props: any) => {
   return (
     <div className={styles.grid}>
-      <div className={cn(styles.card, styles.moose)}>
+      <Card>
         <h2>Dokument</h2>
         <ul>
           {props.dokument.map((item: any) => (
@@ -46,7 +47,7 @@ const Dokument: NextPage = (props: any) => {
             </li>
           ))}
         </ul>
-      </div>
+      </Card>
     </div>
   );
 };

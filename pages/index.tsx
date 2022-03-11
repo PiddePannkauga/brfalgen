@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import { createClient } from "contentful";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 import styles from "../styles/Home.module.css";
-import cn from "classnames";
+import { Document } from "@contentful/rich-text-types";
+import { Card } from "../components/card";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const client = createClient({
@@ -19,20 +21,29 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 type Post = {
+  sys: { updatedAt: string };
   fields: {
     title: string;
     id: string;
+    body: Document;
   };
 };
 
 const Home: NextPage = (props: any) => {
+  const parseDate = (ISOstring: string) => {
+    const date = new Date(ISOstring);
+    return date.toLocaleDateString("se");
+  };
   return (
     <div className={styles.grid}>
       {props.posts.map((post: Post) => (
-        <div key={post.fields.id} className={cn(styles.card, styles.moose)}>
+        <Card key={post.fields.id}>
           <h2>{post.fields.title}</h2>
-          <p>Här ska det bli enkelt att visa nya saker</p>
-        </div>
+          <p>{documentToReactComponents(post.fields.body)}</p>
+          <div className={styles.createdAt}>
+            {parseDate(post.sys.updatedAt)}
+          </div>
+        </Card>
       ))}
     </div>
   );
