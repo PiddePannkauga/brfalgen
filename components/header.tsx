@@ -2,62 +2,46 @@ import type { NextComponentType } from "next";
 import header from "../styles/Header.module.css";
 import Link from "next/link";
 import cn from "classnames";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const Header: NextComponentType = (props) => {
   const [isNavOpen, setisNavOpen] = useState(true);
   const [showMenuButton, setShowMenuButton] = useState(false);
 
-  const handleNavbarOpen = () => {
+  const handleNavbarOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setisNavOpen(!isNavOpen);
+  };
+
+  const handleStickyHeaderOnScroll = () => {
+    if (window.scrollY < 100) {
+      setShowMenuButton(false);
+      setisNavOpen(true);
+      document.querySelector("nav")?.classList.remove(`${header.sticky}`);
+    }
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       function (entries) {
-        if (entries[0].intersectionRatio < 1) {
-          document.querySelector("nav")?.classList.add(`${header.sticky}`);
+        if (entries[0].intersectionRatio < 0.3) {
           setShowMenuButton(true);
           setisNavOpen(false);
+          document.querySelector("nav")?.classList.add(`${header.sticky}`);
         }
       },
-      { threshold: 1 }
+      { threshold: 0.3 }
     );
     const navbar = document.querySelector(`.${header.navbar}`);
-    if (navbar) {
-      observer.observe(navbar);
-    }
+    navbar && observer.observe(navbar);
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY < 170) {
-        setShowMenuButton(false);
-        setisNavOpen(true);
-        document.querySelector("nav")?.classList.remove(`${header.sticky}`);
-      }
-    });
+    window.addEventListener("scroll", handleStickyHeaderOnScroll);
+
     return () => {
-      if (navbar) {
-        observer.unobserve(navbar);
-      }
+      navbar && observer.unobserve(navbar);
+      window.removeEventListener("scroll", handleStickyHeaderOnScroll);
     };
   }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      function (entries) {
-        if (entries[0].intersectionRatio < 0.2) {
-          setShowMenuButton(true);
-          setisNavOpen(false);
-          document.querySelector("nav")?.classList.add(`${header.sticky}`);
-        }
-      },
-      { threshold: 0.2 }
-    );
-    const navbar = document.querySelector(`.${header.navbar}`);
-    if (navbar) {
-      observer.observe(navbar);
-    }
-  }, [isNavOpen]);
 
   return (
     <nav className={cn(header.header)}>
@@ -67,17 +51,10 @@ export const Header: NextComponentType = (props) => {
         </Link>
       )}
       {showMenuButton ? (
-        isNavOpen ? (
-          <button
-            className={header.closebutton}
-            onClick={handleNavbarOpen}
-          ></button>
-        ) : (
-          <button
-            className={header.menubutton}
-            onClick={handleNavbarOpen}
-          ></button>
-        )
+        <button
+          className={isNavOpen ? header.closebutton : header.menubutton}
+          onClick={(e) => handleNavbarOpen(e)}
+        ></button>
       ) : null}
 
       <div
