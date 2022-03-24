@@ -14,7 +14,12 @@ export const Header: NextComponentType = (props) => {
   };
 
   const handleStickyHeaderOnScroll = () => {
-    if (window.scrollY < 100) {
+    const isDesktop = window.innerWidth;
+    if (isDesktop > 920 && window.scrollY < 100) {
+      setShowMenuButton(false);
+      setisNavOpen(true);
+      document.querySelector("nav")?.classList.remove(`${header.sticky}`);
+    } else if (window.scrollY < 50) {
       setShowMenuButton(false);
       setisNavOpen(true);
       document.querySelector("nav")?.classList.remove(`${header.sticky}`);
@@ -24,7 +29,7 @@ export const Header: NextComponentType = (props) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       function (entries) {
-        if (entries[0].intersectionRatio < 0.3) {
+        if (entries[0].intersectionRatio < 1) {
           setShowMenuButton(true);
           setisNavOpen(false);
           document.querySelector("nav")?.classList.add(`${header.sticky}`);
