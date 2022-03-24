@@ -7,46 +7,62 @@ import React, { useEffect, useState } from "react";
 export const Header: NextComponentType = (props) => {
   const [isNavOpen, setisNavOpen] = useState(true);
   const [showMenuButton, setShowMenuButton] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const handleNavbarOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setisNavOpen(!isNavOpen);
   };
 
-  const handleStickyHeaderOnScroll = () => {
-    const isDesktop = window.innerWidth;
-    if (isDesktop > 920 && window.scrollY < 100) {
-      setShowMenuButton(false);
-      setisNavOpen(true);
-      document.querySelector("nav")?.classList.remove(`${header.sticky}`);
-    } else if (window.scrollY < 50) {
-      setShowMenuButton(false);
-      setisNavOpen(true);
-      document.querySelector("nav")?.classList.remove(`${header.sticky}`);
+  const handleStickyHeaderOnScroll = (isDesktop: boolean) => {
+    if (showMenuButton) {
+      if (isDesktop && window.scrollY < 140) {
+        setShowMenuButton(false);
+        setisNavOpen(true);
+        document.querySelector("nav")?.classList.remove(`${header.sticky}`);
+      } else if (window.scrollY < 170) {
+        setShowMenuButton(false);
+        setisNavOpen(true);
+        document.querySelector("nav")?.classList.remove(`${header.sticky}`);
+      }
     }
   };
 
   useEffect(() => {
+    function handleResize() {
+      setIsDesktop(window.innerWidth >= 920);
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const responsiveThreshold = isDesktop ? 0.6 : 0.3;
     const observer = new IntersectionObserver(
       function (entries) {
-        if (entries[0].intersectionRatio < 1) {
+        if (entries[0].intersectionRatio < responsiveThreshold) {
           setShowMenuButton(true);
           setisNavOpen(false);
           document.querySelector("nav")?.classList.add(`${header.sticky}`);
         }
       },
-      { threshold: 0.3 }
+      { threshold: responsiveThreshold }
     );
     const navbar = document.querySelector(`.${header.navbar}`);
     navbar && observer.observe(navbar);
 
-    window.addEventListener("scroll", handleStickyHeaderOnScroll);
+    window.addEventListener("scroll", () =>
+      handleStickyHeaderOnScroll(isDesktop)
+    );
 
     return () => {
       navbar && observer.unobserve(navbar);
-      window.removeEventListener("scroll", handleStickyHeaderOnScroll);
+      window.removeEventListener("scroll", () =>
+        handleStickyHeaderOnScroll(isDesktop)
+      );
     };
-  }, []);
+  }, [showMenuButton]);
 
   return (
     <nav className={cn(header.header)}>
