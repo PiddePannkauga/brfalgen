@@ -9,7 +9,7 @@ const Layout: NextPage = ({ children }: any) => {
       <Head>
         <title>BRF Älgen</title>
         <meta name="description" content="BRF Älgen hemsida" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/algen.svg" />
       </Head>
       <Header />
 
