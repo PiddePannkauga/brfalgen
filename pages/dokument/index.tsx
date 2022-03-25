@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import styles from "../../styles/Home.module.css";
+import dokumentStyles from "./Dokument.module.css";
 import { GetStaticProps } from "next";
 import { createClient } from "contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -40,9 +41,9 @@ const Dokument: NextPage = (props: any) => {
     <div className={styles.grid}>
       <Card>
         <h2>Dokument</h2>
-        <ul>
+        <ul className={dokumentStyles.ul}>
           {props.dokument.map((item: any) => (
-            <li key={item.id}>
+            <li className={dokumentStyles.li} key={item.id}>
               {documentToReactComponents(item.fields.dokument, renderOption)}
             </li>
           ))}
