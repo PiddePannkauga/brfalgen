@@ -18,7 +18,7 @@
   top: -100%;
 }
 
-.header.sticky {
+.sticky {
   position: fixed;
 }
 

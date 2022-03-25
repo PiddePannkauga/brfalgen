@@ -1,5 +1,5 @@
 import type { NextComponentType } from "next";
-import header from "../styles/Header.module.css";
+import styles from "../styles/Header.module.css";
 import Link from "next/link";
 import cn from "classnames";
 import React, { useEffect, useState } from "react";
@@ -19,11 +19,9 @@ export const Header: NextComponentType = (props) => {
       if (isDesktop && window.scrollY < 140) {
         setShowMenuButton(false);
         setisNavOpen(true);
-        document.querySelector("nav")?.classList.remove(`${header.sticky}`);
       } else if (window.scrollY < 170) {
         setShowMenuButton(false);
         setisNavOpen(true);
-        document.querySelector("nav")?.classList.remove(`${header.sticky}`);
       }
     }
   };
@@ -44,12 +42,11 @@ export const Header: NextComponentType = (props) => {
         if (entries[0].intersectionRatio < responsiveThreshold) {
           setShowMenuButton(true);
           setisNavOpen(false);
-          document.querySelector("nav")?.classList.add(`${header.sticky}`);
         }
       },
       { threshold: responsiveThreshold }
     );
-    const navbar = document.querySelector(`.${header.navbar}`);
+    const navbar = document.querySelector(`.${styles.navbar}`);
     navbar && observer.observe(navbar);
 
     window.addEventListener("scroll", () =>
@@ -65,7 +62,7 @@ export const Header: NextComponentType = (props) => {
   }, [showMenuButton]);
 
   return (
-    <nav className={cn(header.header)}>
+    <nav className={cn(styles.header, { [styles.sticky]: showMenuButton })}>
       {!showMenuButton && (
         <Link href={"/"}>
           <h1>Välkommen till BRF Älgen</h1>
@@ -73,13 +70,13 @@ export const Header: NextComponentType = (props) => {
       )}
       {showMenuButton ? (
         <button
-          className={isNavOpen ? header.closebutton : header.menubutton}
+          className={isNavOpen ? styles.closebutton : styles.menubutton}
           onClick={(e) => handleNavbarOpen(e)}
         ></button>
       ) : null}
 
       <div
-        className={header.navbar}
+        className={styles.navbar}
         style={isNavOpen ? { display: "flex" } : { display: "none" }}
       >
         <Link href={"/"}>Hem</Link>
