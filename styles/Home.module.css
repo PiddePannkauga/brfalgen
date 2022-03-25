@@ -1,3 +1,6 @@
+@value small from './CustomMedia.module.css';
+@value medium from './CustomMedia.module.css';
+
 .main {
   min-height: 100vh;
   flex: 1;
@@ -9,6 +12,7 @@
 
 .footer {
   display: flex;
+  flex-direction: column;
   flex: 1;
   padding: 2rem 1rem;
   border-top: 1px solid #eaeaea;
@@ -24,6 +28,18 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+}
+
+.footer p {
+  word-break: keep-all;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+@media (medium) {
+  .footer {
+    flex-direction: row;
+  }
 }
 
 .title a {
@@ -75,7 +91,7 @@
   margin: 1rem;
   padding: 1.5rem;
   min-height: 25rem;
-  max-width: 40rem;
+  max-width: 60rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
@@ -85,6 +101,8 @@
   background-color: var(--secondary);
   box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.4);
   font-family: "header-font", "serif";
+  font-size: 1.25rem;
+  font-weight: 450;
 }
 
 .card h2 {
@@ -94,7 +112,6 @@
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
   line-height: 1.5;
   font-weight: 450;
 }
@@ -104,6 +121,12 @@
   flex-direction: column;
   min-height: 25rem;
   position: relative;
+}
+
+@media (medium) {
+  .card {
+    min-width: 25rem;
+  }
 }
 
 .createdAt {

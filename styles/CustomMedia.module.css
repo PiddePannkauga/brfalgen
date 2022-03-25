@@ -1,6 +1,6 @@
-@value small: max-width: 37.5rem;
-@value medium: max-width: 56.25rem;
-@value large: max-width: 62rem;
+@value small: min-width: 37.5rem;
+@value medium: min-width: 56.25rem;
+@value large: min-width: 62rem;
 /* @custom-media --huge-viewport (min-width: 70rem);
 @custom-media --enormous-viewport (min-width: 75rem);
 @custom-media --ludicrous-viewport (min-width: 88rem); */

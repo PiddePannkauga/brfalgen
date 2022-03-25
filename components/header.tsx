@@ -1,6 +1,7 @@
 import type { NextComponentType } from "next";
 import styles from "../styles/Header.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import cn from "classnames";
 import React, { useEffect, useState } from "react";
 
@@ -8,11 +9,6 @@ export const Header: NextComponentType = (props) => {
   const [isNavOpen, setisNavOpen] = useState(true);
   const [showMenuButton, setShowMenuButton] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-
-  const handleNavbarOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setisNavOpen(!isNavOpen);
-  };
 
   const handleStickyHeaderOnScroll = (isDesktop: boolean) => {
     if (showMenuButton) {
@@ -65,13 +61,20 @@ export const Header: NextComponentType = (props) => {
     <nav className={cn(styles.header, { [styles.sticky]: showMenuButton })}>
       {!showMenuButton && (
         <Link href={"/"}>
-          <h1>Välkommen till BRF Älgen</h1>
+          <h1>
+            BRF Älgen
+            <Image
+              src="/algen.svg"
+              width={isDesktop ? 72 : 48}
+              height={isDesktop ? 72 : 48}
+            />
+          </h1>
         </Link>
       )}
       {showMenuButton ? (
         <button
           className={isNavOpen ? styles.closebutton : styles.menubutton}
-          onClick={(e) => handleNavbarOpen(e)}
+          onClick={() => setisNavOpen(!isNavOpen)}
         ></button>
       ) : null}
 

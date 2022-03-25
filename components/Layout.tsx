@@ -18,7 +18,10 @@ const Layout: NextPage = ({ children }: any) => {
       </main>
 
       <footer className={styles.footer}>
-        Brf Älgen info@brfalgen.se Osbygatan 1 214 43 Malmö Orgnr: 746001-0205
+        <p>Brf Älgen &nbsp;</p>
+        <p>info@brfalgen.se &nbsp;</p>
+        <p>Osbygatan&nbsp;1 214&nbsp;43 &nbsp;</p>
+        <p>Malmö Orgnr: 746001-0205</p>
       </footer>
     </div>
   );
