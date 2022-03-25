@@ -36,7 +36,7 @@ export const Header: NextComponentType = (props) => {
   }, []);
 
   useEffect(() => {
-    const responsiveThreshold = isDesktop ? 0.6 : 0.3;
+    const responsiveThreshold = isDesktop ? 0.9 : 0.27;
     const observer = new IntersectionObserver(
       function (entries) {
         if (entries[0].intersectionRatio < responsiveThreshold) {
