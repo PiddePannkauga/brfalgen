@@ -60,16 +60,20 @@ export const Header: NextComponentType = (props) => {
   return (
     <nav className={cn(styles.header, { [styles.sticky]: showMenuButton })}>
       {!showMenuButton && (
-        <Link href={"/"}>
-          <h1>
-            BRF Älgen
-            <Image
-              src="/algen.svg"
-              width={isDesktop ? 72 : 48}
-              height={isDesktop ? 72 : 48}
-            />
-          </h1>
-        </Link>
+        <>
+          {" "}
+          <Link href={"/"}>
+            <h1>
+              BRF Älgen
+              <Image
+                src="/algen.svg"
+                width={isDesktop ? 72 : 48}
+                height={isDesktop ? 72 : 48}
+              />
+            </h1>
+          </Link>
+          <p>I Malmö sedan 1936</p>
+        </>
       )}
       {showMenuButton ? (
         <button

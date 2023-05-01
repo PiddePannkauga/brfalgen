@@ -14,7 +14,7 @@ const Layout: NextPage = ({ children }: any) => {
       <Header />
 
       <main className={styles.main}>
-        <section style={{ marginTop: "18rem" }}>{children}</section>
+        <section style={{ marginTop: "19rem" }}>{children}</section>
       </main>
 
       <footer className={styles.footer}>

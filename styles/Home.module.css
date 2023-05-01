@@ -3,6 +3,7 @@
 
 .main {
   min-height: 100vh;
+  padding: 2rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -88,10 +89,12 @@
 }
 
 .card {
-  margin: 1rem;
   padding: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   min-height: 25rem;
-  max-width: 60rem;
+  max-width: 50rem;
+  width: 100%;
   text-align: left;
   color: inherit;
   text-decoration: none;
@@ -123,12 +126,6 @@
   position: relative;
 }
 
-@media (medium) {
-  .card {
-    min-width: 25rem;
-  }
-}
-
 .createdAt {
   align-self: flex-end;
   font-style: italic;
@@ -151,18 +148,4 @@
 
 .moose {
   position: relative;
-}
-
-.moose:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.25;
-  background-image: url("./svg/algen.svg");
-  background-repeat: no-repeat;
-  background-position: center center;
 }
