@@ -72,7 +72,7 @@ export const Header: NextComponentType = (props) => {
               />
             </h1>
           </Link>
-          <p>I Malmö sedan 1936</p>
+          <p>På Nobeltorget i Malmö sedan 1936</p>
         </>
       )}
       {showMenuButton ? (
