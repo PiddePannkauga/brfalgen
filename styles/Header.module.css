@@ -2,7 +2,6 @@
 
 .header {
   display: flex;
-  align-items: center;
   text-align: center;
   top: 0;
   width: 100%;
@@ -53,8 +52,6 @@
 
 .menubutton {
   position: relative;
-  margin-left: 1rem;
-  margin-right: auto;
   height: 36px;
   width: 36px;
   background: none;
