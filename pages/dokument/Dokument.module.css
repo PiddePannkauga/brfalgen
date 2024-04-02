@@ -2,10 +2,6 @@
   margin-bottom: 1rem;
 }
 
-.li > a {
-  border-bottom: 1px solid;
-}
-
 .li > a:hover {
   cursor: pointer;
   color: var(--primary);
