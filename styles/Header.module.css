@@ -1,5 +1,9 @@
 @value large from './CustomMedia.module.css';
 
+a {
+  text-decoration: none;
+}
+
 .header {
   display: flex;
   align-items: center;
